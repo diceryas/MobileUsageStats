@@ -23,7 +23,7 @@ public class MyAdapter extends SimpleAdapter {
     Context con;
 
     public MyAdapter(Context context,
-                               List<? extends Map<String, ?>> data, int resource) {
+                     List<? extends Map<String, ?>> data, int resource) {
         super(context, data, resource, null, null);
         this.mResource = resource;
         this.mData = data;
@@ -46,7 +46,6 @@ public class MyAdapter extends SimpleAdapter {
         float time = Float.parseFloat(mData.get(position).get("time").toString());
         int color = Integer.parseInt(mData.get(position).get("color").toString());
         mr.change(time,color);
-        mr = new MyRect(con);
         TextView text2 = (TextView)view.findViewById(R.id.tl_tv3);
         text2.setTextColor(mr.getcolor(color));
         text2.setText(time + "%");

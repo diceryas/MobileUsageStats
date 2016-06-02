@@ -9,13 +9,14 @@ import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import org.json.JSONArray;
 
 /**
  * Created by lenovo on 2016/5/21.
  */
-public class MyRect extends SurfaceView implements SurfaceHolder.Callback {
+public class MyRect extends View {
 
     private Paint paint = null;
     private SurfaceHolder holder;
@@ -27,20 +28,12 @@ public class MyRect extends SurfaceView implements SurfaceHolder.Callback {
         super(context);
         paint = new Paint();
         paint.setColor(Color.RED);
-        holder = getHolder();
-        holder.addCallback(this);
-        this.setZOrderOnTop(true);
-        holder.setFormat(PixelFormat.TRANSLUCENT);
     }
 
     public MyRect(Context context, AttributeSet attrs) {
         super(context , attrs);
         paint = new Paint();
         paint.setColor(Color.RED);
-        holder = getHolder();
-        holder.addCallback(this);
-        this.setZOrderOnTop(true);
-        holder.setFormat(PixelFormat.TRANSLUCENT);
     }
 
     public void change(float num,int color)
@@ -49,13 +42,14 @@ public class MyRect extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(c);
         time = 5.5f * (float)num;
     }
-    private void draw()
+    @Override
+    protected void onDraw(Canvas canvas)
     {
-        canvas = holder.lockCanvas();
         canvas.drawColor(0x00FFFFFF);
         canvas.drawRect(1,1,time,50,paint);
-        holder.unlockCanvasAndPost(canvas);
+        super.onDraw(canvas);
     }
+
     public int getcolor(int color)
     {
         switch (color)
@@ -66,27 +60,11 @@ public class MyRect extends SurfaceView implements SurfaceHolder.Callback {
                 return Color.GREEN;
             case 3:
                 return Color.YELLOW;
+            case 4:
+                return Color.RED;
         }
         return Color.BLACK;
     }
 
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                               int height) {
-        //canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-    }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
-        System.out.println("start1");
-        draw();
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
-        //canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-    }
 
 }

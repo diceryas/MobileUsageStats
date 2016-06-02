@@ -148,6 +148,7 @@ public class MyView extends SurfaceView implements Callback {
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
 		init();
+
 		clock.start();
 		System.out.println("start");
 	}
@@ -172,7 +173,11 @@ public class MyView extends SurfaceView implements Callback {
 			canvas.drawColor(0x00FFFFFF);
 			paint.setStrokeWidth(8.0f);
 			try {
-				if(num < 4)drawback(canvas);
+				if(num < 160)
+				{
+					drawback(canvas);
+					//drawback(canvas);
+				}
 				JSONObject object0 = array.getJSONObject(num);
 				JSONObject object1 = array.getJSONObject(num + 1);
 				JSONObject object2 = array.getJSONObject(num + 2);

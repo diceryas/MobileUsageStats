@@ -1,0 +1,82 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+<style name="CalendarTitle">
+<item name="android:textSize">@dimen/calendar_text_medium</item>
+<item name="android:textColor">@color/calendar_text_active</item>
+<item name="android:textStyle">bold</item>
+</style>
+
+<style name="CalendarCell">
+<item name="android:layout_width">0dp</item>
+<item name="android:layout_weight">1</item>
+<item name="android:gravity">center</item>
+<!-- <item name="android:textAlignment">center</item> -->
+</style>
+
+<style name="CalendarCell.DayHeader">
+<item name="android:textColor">@color/calendar_text_active</item>
+<item name="android:textSize">@dimen/calendar_text_small</item>
+</style>
+
+<style name="CalendarCell.CalendarDate">
+<item name="android:textSize">@dimen/calendar_text_medium</item>
+<item name="android:background">@drawable/calendar_bg_selector</item>
+<item name="android:textColor">@color/calendar_text_selector</item>
+<item name="android:clickable">true</item>
+<item name="android:textStyle">bold</item>
+</style>
+    <style name="MyTheme" parent="android:Theme.Light">
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="CustomizedWindowTitleBackground">
+        <item name="android:background">@color/barcolor</item>
+    </style>
+    <style name="titlebarstyle" parent="android:Theme">
+        <item name="android:windowTitleSize">48dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomizedWindowTitleBackground</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@android:color/white</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <!-- Customize your theme here. -->
+    <style parent="AppTheme" name="MenuFragmentStyle">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:colorForeground">@android:color/transparent</item>
+        <item name="android:colorForegroundInverse">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="TextView"/>
+    <style name="TextView.DefaultStyle">
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textSize">@dimen/menu_text_size</item>
+</style>
+    <style parent="@android:style/Theme.Dialog" name="loginingDlg">
+<item name="android:windowIsFloating">true</item>
+<!-- 设置窗口浮动 -->
+<item name="android:windowFrame">@null</item>
+<!-- 设置无边框 -->
+<item name="android:windowNoTitle">true</item>
+<!-- 设置无标题 -->
+<item name="android:windowBackground">@android:color/transparent</item>
+<!-- 设置背景颜色 透明 -->
+<item name="android:backgroundDimEnabled">true</item>
+<!-- 是否模糊 -->
+<item name="android:windowIsTranslucent">true</item>
+<!-- 半透明 -->
+</style>
+</resources>

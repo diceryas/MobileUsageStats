@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="9"
+    android:layout_height="match_parent"
+    android:background="@color/barcolor">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="New Text"
+        android:layout_weight="1"
+        android:id="@+id/tl_tv1" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:id="@+id/tl_iv" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text=" "
+        android:layout_weight="0.5" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:weightSum="5">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="New Text"
+            android:id="@+id/tl_tv2"
+            android:textColor="@color/black"/>
+
+        <com.diceyas.usagestats.ui.MyRect
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:id="@+id/tl_mr"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="New Text"
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:id="@+id/tl_tv3" />
+</LinearLayout>

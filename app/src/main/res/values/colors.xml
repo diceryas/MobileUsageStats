@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="selected">#111111</drawable>
+    <drawable name="pressed">#222222</drawable>
+    <drawable name="elsed">#333333</drawable>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="calendar_active_month_bg">#fff5f7f9</color>
+    <color name="calendar_bg">#ffffffff</color>
+    <color name="calendar_divider">#ffbababa</color>
+    <color name="calendar_inactive_month_bg">#ffd7d9db</color>
+    <color name="calendar_selected_day_bg">#ff379bff</color>
+    <color name="calendar_selected_day_bg2">#ff77be3c</color>
+    <color name="calendar_selected_range_bg">#ff96caff</color>
+    <color name="calendar_text_inactive">#40778088</color>
+    <color name="calendar_text_active">#ff778088</color>
+    <color name="calendar_text_selected">#ffffffff</color>
+    <color name="calendar_text_unselectable">#7f778088</color>
+    <color name="calendar_text_selector">#ffaa99aa</color>
+    <color name="calendar_text_mark">#ff77be3c</color>
+    <color name="barcolor">#CAE6F7</color>
+    <color name="white">#FFFFFF</color>
+    <color name="text_color">#222222</color>
+    <color name="menu_fragment_background">#B3000000</color>
+    <color name="menu_item_background">#f2f2f2</color>
+    <color name="divider_color">#b5b5b5</color>
+    <color name="black">#000000</color>>
+</resources>

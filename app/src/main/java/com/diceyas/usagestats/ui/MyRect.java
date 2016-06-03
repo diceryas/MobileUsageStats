@@ -46,7 +46,7 @@ public class MyRect extends View {
     protected void onDraw(Canvas canvas)
     {
         canvas.drawColor(0x00FFFFFF);
-        canvas.drawRect(1,1,time,50,paint);
+        canvas.drawRect(1,1,(float) (time * 1.3),50,paint);
         super.onDraw(canvas);
     }
 

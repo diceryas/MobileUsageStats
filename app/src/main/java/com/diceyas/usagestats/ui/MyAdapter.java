@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.diceyas.usagestats.R;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,10 @@ public class MyAdapter extends SimpleAdapter {
         mr.change(time,color);
         TextView text2 = (TextView)view.findViewById(R.id.tl_tv3);
         text2.setTextColor(mr.getcolor(color));
-        text2.setText(time + "%");
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        nf.setMinimumFractionDigits(2);
+        nf.setMaximumFractionDigits(2);
+        text2.setText(nf.format(time) + "%");
         return view;
     }
 }

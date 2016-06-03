@@ -40,11 +40,14 @@ public class MainFragment extends Fragment {
         int i = 0;
         for(AppUseTime app : arrayList)
         {
+            int appTime = LocalDataBase.select(db,app.pkgName);
+            int totalTime = LocalDataBase.getSum(db);
             Map<String, Object> keyValuePair = new HashMap<String, Object>();
             keyValuePair.put("num", ++i );
             keyValuePair.put("user",appInfo.getAppIcon(app.pkgName));
             keyValuePair.put("name",appInfo.getAppName(app.pkgName));
-            keyValuePair.put("time",30 + 10 * (3 - i));
+
+            keyValuePair.put("time",appTime * 1.0/(totalTime * 1.0) * 100);
             keyValuePair.put("color",i + 1);
             list.add(keyValuePair);
         }
@@ -106,7 +109,6 @@ public class MainFragment extends Fragment {
                 return R.drawable.num9;
             default:
                 return R.drawable.num0;
-
 
         }
     }

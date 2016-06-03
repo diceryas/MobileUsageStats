@@ -5,18 +5,23 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
 
+import com.diceyas.usagestats.ContextUtil;
 import com.diceyas.usagestats.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.diceyas.usagestats.db.LocalDataBase;
+import com.diceyas.usagestats.db.MyDataBaseHelper;
 import com.diceyas.usagestats.lib.timessquare.*;
 
 public class History extends Activity {
@@ -91,8 +96,21 @@ public class History extends Activity {
 
             @Override
             public void onDateSelected(Date date) {
-                new AlertDialog.Builder(History.this).setTitle("玩你妹的手机")
-                        .setMessage("数据加载中")
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                String str =simpleDateFormat.format(date);
+                int year=Integer.parseInt(str.substring(0,4));
+                int month = Integer.parseInt(str.substring(4,6));
+                int day = Integer.parseInt(str.substring(6, 8));
+                MyDataBaseHelper dbHelper = new MyDataBaseHelper(ContextUtil.getInstance(), "lianji.db",null, 1);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                int totalTime = LocalDataBase.getSum(db, year,month,day);
+                int hours = (totalTime / 3600);
+                int minutes = ((totalTime % 3600) / 60);
+                int seconds = (totalTime % 60);
+
+                new AlertDialog.Builder(History.this).setTitle("" + year + "年" + month + "月" + day + "日")
+                        .setMessage("当天手机使用时长为：" + hours + "时" + minutes + "分" + seconds + "秒")
                         .setPositiveButton("确定",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件

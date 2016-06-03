@@ -1,15 +1,21 @@
 package com.diceyas.usagestats.ui;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.CountDownTimer;
+import android.text.style.LocaleSpan;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+
+import com.diceyas.usagestats.ContextUtil;
+import com.diceyas.usagestats.db.LocalDataBase;
+import com.diceyas.usagestats.db.MyDataBaseHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +29,11 @@ public class MyView extends SurfaceView implements Callback {
 	private Canvas canvas;
 	private int num;
 	private int y;
+	MyDataBaseHelper dbHelper = new MyDataBaseHelper(ContextUtil.getInstance(), "lianji.db",null, 1);
+	SQLiteDatabase db = dbHelper.getWritableDatabase();
+	double arraylist[];
+	double a1[];
+
 	private int b1[];
 	JSONArray array;
 	public MyView(Context context) {
@@ -47,6 +58,15 @@ public class MyView extends SurfaceView implements Callback {
 		holder.addCallback(this);
 		clock=new TimeCount(30000,10);
 		this.setZOrderOnTop(true);
+		arraylist = new double[8];
+		a1 = new double[9];
+		arraylist = LocalDataBase.getUsageRatio(db);
+		for(int i = 0;i < 7;++i)
+		{
+			a1[i + 1] = (arraylist[i] + arraylist[i+1])/2 * 100;
+		}
+		a1[0] = arraylist[0] * 100;
+		a1[8] = arraylist[7] * 100;
 		y = 0;
 		holder.setFormat(PixelFormat.TRANSLUCENT);
 	}
@@ -55,16 +75,15 @@ public class MyView extends SurfaceView implements Callback {
 	{
 		this.setZOrderOnTop(true);
 		holder.setFormat(PixelFormat.TRANSLUCENT);
-		int a[] = new int[9];
-		a[0] = 20;a[1] = 0;a[2] = 10;a[3] = 90;a[4] = 40;a[5] = 80;a[6] = 20;a[7] = 100;a[8] = 80;
+
 		try {
 			array = new JSONArray();
 			for(int i = 0;i < 8;++i)
 			{
 				double d = 128 + 90 * i;
-				double b = 490 - 4.5 * a[i];
+				double b = 490 - 4.5 * a1[i];
 				b1[i] = (int)b;
-				double c = 490 - 4.5 * a[i + 1];
+				double c = 490 - 4.5 * a1[i + 1];
 				b1[i+1] = (int)c;
 				double e = (c - b)/20;
 				for(int j = 0;j < 20;++j)
@@ -76,7 +95,7 @@ public class MyView extends SurfaceView implements Callback {
 				}
 			}
 			JSONObject object = new JSONObject();
-			object.put("y",130);
+			object.put("y",490 - 4.5 * a1[8]);
 			object.put("x",848);
 			array.put(object);
 		} catch (JSONException e1) {

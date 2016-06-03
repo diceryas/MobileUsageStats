@@ -5,12 +5,14 @@ package com.diceyas.usagestats.service;
  */
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,6 +28,7 @@ import com.diceyas.usagestats.db.MyDataBaseHelper;
 import com.diceyas.usagestats.other.AndroidAppProcess;
 import com.diceyas.usagestats.other.AndroidProcesses;
 import com.diceyas.usagestats.receiver.LockScreenReceiver;
+import com.diceyas.usagestats.ui.SendAndReceive;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,22 +84,29 @@ public class NameRecordingService extends Service {
                 //getRunningAppProcessInfo(running.processName,context);
                 //System.out.println("running = "+running.importance);
 
-                if(running.processName.equals(packageName) && running.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND)
-                {
-                   // Log.d("abc", appName + "      " + packageName + "      " + running.importance);//正在运行的应用程序名
-                    dbHelper = new MyDataBaseHelper(context, "lianji.db",null, 1);
+                if(running.processName.equals(packageName) && running.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                    Log.d("abc", appName + "      " + packageName + "      " + running.importance);//正在运行的应用程序名
+                    dbHelper = new MyDataBaseHelper(context, "lianji.db", null, 1);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     //更新对应软件的数据
                     LocalDataBase.update(db, packageName, 5);
-                    Log.d(packageName, "" + LocalDataBase.select(db, packageName));
-                   // Log.d("db",""+LocalDataBase.getSum(db));
-                    ArrayList<AppUseTime> l = LocalDataBase.getAppList(db);
-                    for (AppUseTime t: l)
-                    {
-                       // Log.d("db", t.pkgName+" cost "+t.time+" second(s).");
+                    //Log.d(packageName, "" + LocalDataBase.select(db, packageName));
+                    //Log.d("db",""+LocalDataBase.getSum(db));
+                    int lastTime = LocalDataBase.getLastUpdateTime(db);
+                    Log.d("db", " last updated in " + lastTime);
+                    if ((int) System.currentTimeMillis() - lastTime > 15 * 1000 || (int) System.currentTimeMillis() - lastTime < 0) {
+                        LocalDataBase.setLastUpdateTime(db);
+                        Log.d("db", "update");
+                        SendAndReceive sar = new SendAndReceive();
+                        String url = "http://139.129.47.180:8004/php/setPastData.php";
+                        SharedPreferences sharedPreferences= context.getSharedPreferences("test",
+                                Activity.MODE_PRIVATE);
+// 使用getString方法获得value，注意第2个参数是value的默认值
+                        String name =sharedPreferences.getString("userName", "");
+                        String password =sharedPreferences.getString("password", "");
+                        String data = "username=" + name + "&password=" + password + "&pastdata=" + LocalDataBase.getSum(db);
+                        sar.postAndGetString(url,data);
                     }
-                    double[] d = LocalDataBase.getUsageRatio(db);
-                   // for (int i = 0; i < 8; i++) Log.d("ratio", ""+d[i]);
                 }
             }
         }

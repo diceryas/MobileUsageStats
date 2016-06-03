@@ -73,7 +73,11 @@ public class UserRankList extends Activity {
                     ImageView imageView=(ImageView)findViewById(R.id.pai_iv1);
                     imageView.setImageResource(ee.getimage(jsonObject3.getInt("imgid")));
                     textView=(TextView)findViewById(R.id.pai_tv6);
-                    textView.setText(jsonObject3.getString("phonetime"));
+                    int totalTime = Integer.parseInt(jsonObject3.getString("phonetime"));
+                    int hours = (totalTime / 3600);
+                    int minutes = ((totalTime % 3600) / 60);
+                    int seconds = (totalTime % 60);
+                    textView.setText(hours + "时" + minutes + "分" + seconds + "秒");
                     textView=(TextView)findViewById(R.id.pai_tv5);
                     textView.setText(jsonObject3.getString("username"));
                     continue;
@@ -86,7 +90,12 @@ public class UserRankList extends Activity {
                 map.put("num", jsonObject3.getString("rank"));
                 map.put("name", jsonObject3.getString("username"));
                 map.put("img", ee.getimage(jsonObject3.getInt("imgid")));
-                map.put("time",jsonObject3.getString("phonetime"));
+                int totalTime = Integer.parseInt(jsonObject3.getString("phonetime"));
+                int hours = (totalTime / 3600);
+                int minutes = ((totalTime % 3600) / 60);
+                int seconds = (totalTime % 60);
+                //textView.setText(hours + "时" + minutes + "分" + seconds + "秒");
+                map.put("time",hours + "时" + minutes + "分" + seconds + "秒");
                 list.add(map);
             }
         } catch (JSONException e) {

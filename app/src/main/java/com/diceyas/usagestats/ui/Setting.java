@@ -104,7 +104,7 @@ public class Setting extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // TODO Auto-generated method stub
-                                editor.putInt("password", choose);
+                                editor.putInt("icon", choose);
                                 System.out.println(choose);
                                 editor.commit();
                                 SendAndReceive sar = new SendAndReceive();

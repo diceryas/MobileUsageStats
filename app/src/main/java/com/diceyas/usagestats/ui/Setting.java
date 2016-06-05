@@ -32,6 +32,8 @@ public class Setting extends Activity {
     SharedPreferences.Editor editor;
     private int icon;
     private int choose;
+    private String username;
+    private String password;
     private ImageView im;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,10 @@ public class Setting extends Activity {
         mySharedPreferences= getSharedPreferences("test", Activity.MODE_PRIVATE);
         editor = mySharedPreferences.edit();
         icon = mySharedPreferences.getInt("icon",0);
+        username = mySharedPreferences.getString("userName","");
+        password = mySharedPreferences.getString("password","");
         im = (ImageView)findViewById(R.id.setting_iv2);
+        ((TextView)findViewById(R.id.setting_tv)).setText(username);
         im.setImageResource(exchange.getimage(icon));
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.title2);
         findViewById(R.id.button_title_l).setOnClickListener(new View.OnClickListener()
@@ -102,6 +107,10 @@ public class Setting extends Activity {
                                 editor.putInt("password", choose);
                                 System.out.println(choose);
                                 editor.commit();
+                                SendAndReceive sar = new SendAndReceive();
+                                String url = "http://139.129.47.180:8004/php/setImageId.php";
+                                String data = "username=" + username + "&password=" + password + "&imageid=" + choose;
+                                sar.postAndGetString(url,data);
                                 im.setImageResource(exchange.getimage(choose));
                             }
                         }).

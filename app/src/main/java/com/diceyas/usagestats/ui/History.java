@@ -59,21 +59,21 @@ public class History extends Activity {
         );
 
         Calendar cal = Calendar.getInstance();
-        cal.set(2016,5,14);
+        cal.set(2016,5,1);
         calsList.add(cal);
 
         Calendar cal1 = Calendar.getInstance();
-        cal1.set(2016,5,16);
+        cal1.set(2016,5,2);
         calsList.add(cal1);
 
         calsList2 = new ArrayList<Calendar>();
 
         Calendar cal2 = Calendar.getInstance();
-        cal2.set(2016,5,13);
+        cal2.set(2016,5,3);
         calsList2.add(cal2);
 
         Calendar cal3 = Calendar.getInstance();
-        cal3.set(2016,5,15);
+        cal3.set(2016,5,4);
         calsList2.add(cal3);
 
 //设置日期点击监听器

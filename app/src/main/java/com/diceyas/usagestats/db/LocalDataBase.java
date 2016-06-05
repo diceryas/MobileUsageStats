@@ -118,13 +118,19 @@ public class LocalDataBase {
 
     public static double[] getUsageRatio(SQLiteDatabase db)
     {
-        int totalTime = getSum(db);
+        Calendar calendar = Calendar.getInstance();
+        int days = calendar.get(Calendar.DATE);
+        calendar.set(Calendar.DATE, days - 1);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int totalTime = getSum(db, year, month,day);
         double ratio[] = new double[8];
         double percentage[] = new double[]{0.2, 0.1, 0.5, 0.95, 0.95, 0.95, 0.95, 0.75};
         Random r1 = new Random(System.currentTimeMillis() / (1000 * 60 * 60 * 24));
         double sum = 0;
         for (int i = 0; i < 8; i++) {
-            if (r1.nextDouble() < percentage[i]) ratio[i] = 0; else ratio[i] = r1.nextDouble() * percentage[i];
+            if (r1.nextDouble() > percentage[i]) ratio[i] = 0; else ratio[i] = r1.nextDouble() * percentage[i];
             sum += ratio[i];
         }
         int useTime[] = new int[8];

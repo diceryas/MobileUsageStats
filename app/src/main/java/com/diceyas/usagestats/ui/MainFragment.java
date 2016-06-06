@@ -40,6 +40,7 @@ public class MainFragment extends Fragment {
         int i = 0;
         for(AppUseTime app : arrayList)
         {
+            if(appInfo.getAppName(app.pkgName) == null) continue;
             int appTime = LocalDataBase.select(db,app.pkgName);
             int totalTime = LocalDataBase.getSum(db);
             Map<String, Object> keyValuePair = new HashMap<String, Object>();

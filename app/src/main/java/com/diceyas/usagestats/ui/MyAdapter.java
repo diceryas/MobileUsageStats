@@ -42,7 +42,9 @@ public class MyAdapter extends SimpleAdapter {
         image.setImageDrawable((Drawable) mData.get(position).get("user"));
         //image.setImageResource(Integer.parseInt(mData.get(position).get("user").toString()));
         TextView text1 = (TextView) view.findViewById(R.id.tl_tv2);
+        //if (mData.get(position).get("name")!=null&&!"".equals(mData.get(position).get("name"))) {
         text1.setText(mData.get(position).get("name").toString());
+        //}
         MyRect mr = (MyRect)view.findViewById(R.id.tl_mr);
         float time = Float.parseFloat(mData.get(position).get("time").toString());
         int color = Integer.parseInt(mData.get(position).get("color").toString());

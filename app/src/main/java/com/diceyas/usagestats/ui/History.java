@@ -76,6 +76,22 @@ public class History extends Activity {
         cal3.set(2016,5,4);
         calsList2.add(cal3);
 
+        Calendar cal4 = Calendar.getInstance();
+        cal4.set(2016,5,5);
+        calsList.add(cal4);
+
+        Calendar cal5 = Calendar.getInstance();
+        cal5.set(2016,5,6);
+        calsList2.add(cal5);
+
+        Calendar cal6 = Calendar.getInstance();
+        cal6.set(2016,5,7);
+        calsList2.add(cal6);
+
+        Calendar cal7 = Calendar.getInstance();
+        cal7.set(2016,5,8);
+        calsList2.add(cal7);
+
 //设置日期点击监听器
         calendar.setOnDateSelectedListener(new CalendarView.OnDateSelectedListener() {
 
